@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <div>
 
-    <footer className="bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow mt-8 flex flex-row justify-between md:items-center md:p-6 dark:bg-[#78C1F3] font-mono">  
+    <footer className="bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow mt-8 flex flex-row justify-between md:items-center md:p-6 dark:bg-[#78C1F3] ">  
           <span className="text-sm font-bold text-white sm:text-center dark:text-white">© 2023 <a href="/" className="hover:underline text-right">رسكله</a> 
             <p>جميع الحقوق محفوظه </p>
              </span>

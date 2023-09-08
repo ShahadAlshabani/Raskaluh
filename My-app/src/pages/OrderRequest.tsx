@@ -1,7 +1,7 @@
-import Profile from '../components/Profile'
+import React from 'react'
 import { SideNav } from '../components/SideNav'
 
-export const User = () => {
+function OrderRequest() {
     if(localStorage.getItem('isLogged')!== 'true'){
         window.location.href='/login'
       }
@@ -10,9 +10,10 @@ export const User = () => {
     <div>
 
         <SideNav></SideNav>
-        <Profile></Profile>
        
     </div>
     
   )
 }
+
+export default OrderRequest

@@ -22,7 +22,7 @@ const Home = () => {
             console.log(result.text);
             Swal.fire({
                 icon: 'success',
-                title: '!تم ارسال الايميل بنجاح',
+                title: '!تم ارسال الرساله بنجاح',
                 showConfirmButton: false,
                 timer: 1500
               })
@@ -42,7 +42,7 @@ const Home = () => {
       };
   return (
     <div>
-          <nav className="fixed top-0 z-20 w-full bg-white border-gray-200 dark:bg-white font-mono">
+          <nav className="fixed top-0 z-20 w-full bg-white border-gray-200 dark:bg-white ">
          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 ">
          <div className="flex md:order-1">
              <a href='/login' className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-[#78C1F3] dark:hover:bg-[#9BE8D8] dark:focus:ring-blue-800" >تسجيل الدخول</a>
@@ -79,7 +79,7 @@ const Home = () => {
     <div className=" mb-36">
 
      <CardsHome></CardsHome>
-     <div className="dark:bg-[#78C1F3] w-full h-auto  md:h-96 flex justify-end font-mono ">
+     <div className="dark:bg-[#78C1F3] w-full h-auto  md:h-96 flex justify-end  ">
     <div className="flex flex-col justify-center md:text-xl text-right  md:mr-20 sm:text-sm">
     <ul className="flex flex-col sm:mt-5 sm:mb-5">
       <li className="bg-white rounded-full inline-block px-4 py-5 mb-2 hover:bg-[#9BE8D8] cursor-pointer hover:scale-110">شارك معنا في الحفاظ على البيئة لتكن مسؤوليتنا الاجتماعية</li>
@@ -88,24 +88,24 @@ const Home = () => {
     </ul>
      </div>
     <div className="flex flex-col justify-center rounded-r-lg rounded-full bg-white p-4 md:p-16 cursor-pointer hover:scale-110">
-    <h1 className="text-3xl font-mono font-bold text-center" >ساهم معنا</h1>
+    <h1 className="text-3xl font-bold text-center" >ساهم معنا</h1>
     </div>
     </div>
 
-    <div className="dark:bg-[#9BE8D8] w-full h-auto  md:h-96 flex justify-start font-mono mb-10 " id="about-us" >
+    <div className="dark:bg-[#9BE8D8] w-full h-auto  md:h-96 flex justify-start font-serif  mb-10 " id="about-us" >
     <div className="flex flex-col justify-center rounded-l-lg rounded-full bg-white p-16 md:p-20 cursor-pointer hover:scale-110 " >
-    <h1 className="text-3xl font-mono font-bold text-center ">عنا</h1>
+    <h1 className="text-3xl  font-bold text-center ">عنا</h1>
     </div>
-    <div className="flex flex-col justify-center md:text-xl text-right ml-4 md:ml-20 sm:text-sm sm:mt-5 sm:mb-5">
+    <div className="flex flex-col justify-center md:text-2xl text-right ml-4 md:ml-20 sm:text-sm sm:mt-5 sm:mb-5">
     <div >
-    <p className="bg-white rounded-l inline-block px-10 py-10 mb-2"><b>رسكله</b> هو موقع يهدف للسماح للأشخاص بإعادة التدوير من خلال توفيرهم بالورق والبلاستيك والزجاج. يعمل الموقع كمنصة تجمع بين الأفراد الذين يرغبون في التخلص من موادهم القابلة للتدوير.
+    <p className="bg-white rounded-l inline-block px-10 py-10 mb-2 "><b>رسكله</b> هو موقع يهدف للسماح للأشخاص بإعادة التدوير من خلال توفيرهم بالورق والبلاستيك والزجاج. يعمل الموقع كمنصة تجمع بين الأفراد الذين يرغبون في التخلص من موادهم القابلة للتدوير.
 من خلال تسهيل عملية إعادة التدوير، يساهم "رسكله" في تقليل النفايات والحد من استهلاك الموارد الطبيعية. يعمل الموقع على تعزيز ثقافة الاستدامة والحفاظ على البيئة من خلال تشجيع المشاركة الفعّالة في عملية إعادة التدوير وتعزيز التعاون بين  
 الأفراد</p>
     </div> 
      </div>
    
     </div>
-     <div className="bg-white dark:bg-white font-mono" id="contact-us">
+     <div className="bg-white dark:bg-white " id="contact-us">
          <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md" >
         <h2 className="mb-4 mt-2 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-black" >تواصل معنا</h2>
         <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl" >نسعد بتلقي استفساراتكم</p>
