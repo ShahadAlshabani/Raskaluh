@@ -1,18 +1,21 @@
 import React from 'react'
 import { SideNavAdmin } from '../components/SideNavAdmin'
-import Profile from '../components/Profile'
+import AdminOrdersC from '../components/AdminOrdersC'
 
-function Admin() {
+function AdminOrders() {
     if(localStorage.getItem('isLogged')!== 'true'){
         window.location.href='/login'
       }
+
   return (
     <div>
-       <SideNavAdmin></SideNavAdmin>
-       <Profile></Profile>
 
+        <SideNavAdmin></SideNavAdmin>
+        <AdminOrdersC></AdminOrdersC>
+       
     </div>
+    
   )
 }
 
-export default Admin
+export default AdminOrders

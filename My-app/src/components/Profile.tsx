@@ -30,7 +30,12 @@ function Profile() {
     const {id} = useParams()
     const [getInfo, setgetInfo] = useState<userInfo[]>([]);
 
- 
+    const [form, setform] = useState<userInfo>({
+      userName: "",
+      email: "",
+      password: "",
+      img:""
+    })
 
     React.useEffect(() => {
             getData();
@@ -41,9 +46,9 @@ function Profile() {
               .get('https://64facb17cb9c00518f7a31dc.mockapi.io/users')
               .then((response) => {
                 const users = response.data;
-                const specificUser = users.find((user: { id: string | undefined; }) => user.id === id);
+                  const specificUser = users.find((user: { id: string | undefined; }) => user.id === id);
                 setgetInfo([specificUser]); 
-    
+                setform(specificUser);
                 
                 }
               )
@@ -65,12 +70,7 @@ function Profile() {
      const closeDrawer = () => setOpen(false);
    
 
-     const [form, setform] = useState<userInfo>({
-        userName: "",
-        email: "",
-        password: "",
-        img:"https://static.vecteezy.com/system/resources/previews/007/296/443/original/user-icon-person-icon-client-symbol-profile-icon-vector.jpg"
-      })
+   
       const [error, setError] = useState("");
      const edit = () =>{
         if(form.userName == "" || form.email == "" || form.password == ""){
@@ -135,7 +135,7 @@ function Profile() {
 
                 <div className="w-full flex flex-col items-center justify-center h-screen">
                     
-                    <div className="flex flex-col items-center justify-center -mt-96 mr-72">
+                    <div className="flex flex-col items-center justify-center -mt-96 md:mr-72 md:ml-20">
                     <Popover placement="bottom" >
                     <PopoverHandler>
                     <div className="relative" >
@@ -146,8 +146,20 @@ function Profile() {
                          alt=""
                         />
                     </div>
-                    <img src={user.img} className="w-40 h-40 border-4 border-white rounded-full "/>
-                    </div>
+                    {user.img ? (
+                       <img
+                      src={user.img}
+                      className="w-40 h-40 border-4 border-white rounded-full"
+                      alt="User Image"
+                    />
+                    ) : (
+                    <img
+                      src="https://img.freepik.com/premium-vector/recycle-icon-symbol-vector-illustration_77417-300.jpg"
+                       className="w-40 h-40 border-4 border-white rounded-full"
+                       alt="Default Image"
+                     />
+                    )}
+              </div>
                     </PopoverHandler>
                     <PopoverContent dir='rtl' className=' w-36 lg:w-72'>
                          <Typography variant="h6" color="blue-gray" className="mb-6">
@@ -170,14 +182,14 @@ function Profile() {
                 <AiFillEdit className="w-5 h-5 mb-3 cursor-pointer" onClick={openDrawer} />
   
 
-                    <h4 className="text-sm text-gray-900 font-bold lg:text-2xl">المعلومات</h4>
+                    <h4 className="text-2xl text-gray-900 font-bold lg:text-3xl">المعلومات</h4>
                     <ul className="mt-2 text-gray-700">
-                        <li className="flex border-y py-2 text-sm lg:text-lg">
-                            <span className="font-bold ml-3">اسم المستخدم:</span>
+                        <li className="flex border-y py-2 text-lg lg:text-lg">
+                            <span className="font-bold lg:text-2xl ml-3 ">اسم المستخدم:</span>
                             <span className="text-gray-700">{user.userName}</span>
                         </li>
-                        <li className="flex border-b py-2 text-sm lg:text-lg">
-                            <span className="font-bold ml-3">العنوان الالكتروني:</span>
+                        <li className="flex border-b py-2 text-lg lg:text-lg">
+                            <span className="font-bold lg:text-2xl ml-3">العنوان الالكتروني:</span>
                             <span className="text-gray-700 ">{user.email}</span>
                         </li>
                

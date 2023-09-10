@@ -1,4 +1,4 @@
-import {FaAddressCard, FaCoins} from 'react-icons/fa'
+import {FaAddressCard} from 'react-icons/fa'
 import {FaClipboardList} from 'react-icons/fa'
 import { MdAssignmentAdd } from 'react-icons/md'
 import {PiSignOutBold} from 'react-icons/pi'
@@ -7,7 +7,7 @@ import logo  from '../assets/logo.png'
 import 'flowbite'
 
 
-export const SideNav = () => {
+export const SideNavAdmin = () => {
     const {id} = useParams()
 
     const signOut = () =>{
@@ -35,7 +35,7 @@ export const SideNav = () => {
       </a>
       <ul className="space-y-3 font-medium">
         <li>
-        <NavLink  to={`/user/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+        <NavLink  to={`/admin/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
         style={({ isActive}) => {
               return {
                 fontWeight: isActive ? "bold" : "",
@@ -48,7 +48,7 @@ export const SideNav = () => {
           </NavLink>
         </li>
         <li>
-        <NavLink  to={`/user/orderRe/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+        <NavLink  to={`/admin/orders/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
         style={({ isActive}) => {
               return {
                 fontWeight: isActive ? "bold" : "",
@@ -57,7 +57,20 @@ export const SideNav = () => {
                };
               }}>
             <MdAssignmentAdd className="w-6 h-6" />
-            <span className="mr-3 text-lg">تقديم طلب</span>
+            <span className="mr-3 text-lg">الطلبات</span>
+          </NavLink>
+        </li>
+        <li>
+        <NavLink  to={`/user/orderRe/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+        style={({ isActive}) => {
+              return {
+                fontWeight: isActive ? "bold" : "",
+                color: isActive ? "#9BE8D8" : "",
+
+               };
+              }}>
+            <FaClipboardList className="w-6 h-6" />
+            <span className="mr-3 text-lg">الطلبات المقبوله</span>
           </NavLink>
         </li>
         <li>
@@ -70,7 +83,7 @@ export const SideNav = () => {
                };
               }}>
             <FaClipboardList className="w-6 h-6" />
-            <span className="mr-3 text-lg">طلباتي</span>
+            <span className="mr-3 text-lg">الطلبات المرفوضه</span>
           </NavLink>
         </li>
         <li>
@@ -82,15 +95,7 @@ export const SideNav = () => {
             <span className="mr-3 text-lg">تسجيل خروج</span>
           </button>
         </li>
-        <li>
-          <div
-            className="flex items-center mt-80 p-2 text-gray-900 rounded-lg dark:text-white group"
-          >
-            <FaCoins className="w-6 h-6" />
-            <span className="mr-3 text-lg">١٠٠</span>
-            <span className="mr-3 text-lg">نقطه</span>
-          </div>
-        </li>
+      
       </ul>
     </div>
   </aside>

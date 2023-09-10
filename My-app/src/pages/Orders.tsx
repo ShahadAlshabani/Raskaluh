@@ -1,8 +1,8 @@
 import React from 'react'
 import { SideNav } from '../components/SideNav'
-import OrderRequestContent from '../components/OrderRequestContent'
+import OrdersContent from '../components/OrdersContent'
 
-function OrderRequest() {
+function Order() {
     if(localStorage.getItem('isLogged')!== 'true'){
         window.location.href='/login'
       }
@@ -11,11 +11,11 @@ function OrderRequest() {
     <div>
 
         <SideNav></SideNav>
-        <OrderRequestContent></OrderRequestContent>
+        <OrdersContent></OrdersContent>
        
     </div>
     
   )
 }
 
-export default OrderRequest
+export default Order
