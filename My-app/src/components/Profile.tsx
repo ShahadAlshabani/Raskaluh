@@ -201,7 +201,8 @@ function Profile() {
             </div>
   
             </div>
-            <Drawer open={open} onClose={closeDrawer} dir='rtl' className='w-52 lg:w-full'>
+            
+            <Drawer open={open} onClose={closeDrawer} dir='rtl' className='w-52 lg:w-full '>
                 <div className="mb-2 flex items-center justify-between p-4">
                 <Typography variant="h3" color="blue-gray">
                 تعديل البيانات
@@ -261,8 +262,6 @@ function Profile() {
             
             )
          })}
-
-         
          
     </div>
     

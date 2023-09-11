@@ -1,6 +1,5 @@
 import {FaAddressCard} from 'react-icons/fa'
-import {FaClipboardList} from 'react-icons/fa'
-import { MdAssignmentAdd } from 'react-icons/md'
+import {  MdPlaylistAdd, MdPlaylistAddCheck, MdPlaylistRemove } from 'react-icons/md'
 import {PiSignOutBold} from 'react-icons/pi'
 import { NavLink, useParams } from 'react-router-dom'
 import logo  from '../assets/logo.png'
@@ -35,7 +34,7 @@ export const SideNavAdmin = () => {
       </a>
       <ul className="space-y-3 font-medium">
         <li>
-        <NavLink  to={`/admin/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+        <NavLink  to={`/admin/${id}`} className="flex items-center p-2 mr-1 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
         style={({ isActive}) => {
               return {
                 fontWeight: isActive ? "bold" : "",
@@ -56,12 +55,12 @@ export const SideNavAdmin = () => {
 
                };
               }}>
-            <MdAssignmentAdd className="w-6 h-6" />
-            <span className="mr-3 text-lg">الطلبات</span>
+            <MdPlaylistAdd className="w-7 h-7" />
+            <span className="mr-3 text-lg">الطلبات الحاليه</span>
           </NavLink>
         </li>
         <li>
-        <NavLink  to={`/user/orderRe/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+        <NavLink  to={`/admin/AcOrders/${id}`}  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
         style={({ isActive}) => {
               return {
                 fontWeight: isActive ? "bold" : "",
@@ -69,12 +68,12 @@ export const SideNavAdmin = () => {
 
                };
               }}>
-            <FaClipboardList className="w-6 h-6" />
+            <MdPlaylistAddCheck className="w-7 h-7" />
             <span className="mr-3 text-lg">الطلبات المقبوله</span>
           </NavLink>
         </li>
         <li>
-        <NavLink  to={`/user/orders/${id}`} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+        <NavLink  to={`/admin/ReOrders/${id}`} className="flex items-center  p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
         style={({ isActive}) => {
               return {
                 fontWeight: isActive ? "bold" : "",
@@ -82,13 +81,13 @@ export const SideNavAdmin = () => {
 
                };
               }}>
-            <FaClipboardList className="w-6 h-6" />
+            <MdPlaylistRemove className="w-7 h-7 " />
             <span className="mr-3 text-lg">الطلبات المرفوضه</span>
           </NavLink>
         </li>
         <li>
           <button
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
+            className="flex items-center mr-1 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-[#9BE8D8] group"
             onClick={()=>{signOut()}}
           >
             <PiSignOutBold className="w-6 h-6" />

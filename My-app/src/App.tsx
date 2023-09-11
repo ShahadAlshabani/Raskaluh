@@ -9,6 +9,8 @@ import OrderRequest from './pages/OrderRequest'
 import Orders from './pages/Orders'
 import Admin from './pages/Admin'
 import AdminOrders from './pages/AdminOrders'
+import AdminAcceptOrders from './pages/AdminAcceptOrders'
+import AdminRejectOrders from './pages/AdminRejectOrders'
 function App() {
 
   return (
@@ -22,6 +24,10 @@ function App() {
         <Route path="/user/orders/:id" element={<Orders/>}/>
         <Route path="/admin/:id" element={<Admin/>}/>
         <Route path="/admin/orders/:id" element={<AdminOrders/>}/>
+        <Route path="/admin/AcOrders/:id" element={<AdminAcceptOrders/>}/>
+        <Route path="/admin/ReOrders/:id" element={<AdminRejectOrders/>}/>
+
+
 
 
        

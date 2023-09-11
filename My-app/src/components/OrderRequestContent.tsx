@@ -30,6 +30,7 @@ type Order = {
   time:string,
 
   location:string,
+  loc:object,
   status:string,
  
 }
@@ -46,6 +47,8 @@ function OrderRequestContent() {
       };
       const [userLocation, setUserLocation] = useState<Location>();
       const [placeName, setPlaceName] = useState<string>('');
+      // const [placeLoc, setPlaceLoc] = useState<Location>();
+
       const fetchPlaceName = async (latitude: number, longitude: number) => {
         try {
           const response = await fetch(
@@ -117,11 +120,12 @@ function OrderRequestContent() {
         item2Count: 0,
         item3Count: 0,
 
-        date:"",
-        time:"",
+        date:"سيتم تحديده لاحقا",
+        time:"سيتم تحديده لاحقا",
 
         location:"",
-        status:"تحت المعالجه"
+        status:"تحت المعالجه",
+        loc: { lat: 0, lng: 0 }
       });
 
 
@@ -157,6 +161,7 @@ function OrderRequestContent() {
       
               location:orderData.location,
               status:orderData.status,
+              loc:userLocation,
               
             })
               .then(response => {
@@ -270,39 +275,8 @@ function OrderRequestContent() {
                   <input type="number" name="item3Count" id="item3Count" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="12"
                     min="0" value={orderData.item3Count} onChange={(e) => setOrderData({...orderData , item3Count:parseInt(e.target.value)})}  />
                     </div> 
-             <div className="mb-5">
-                <label
-                    htmlFor="date"
-                    className="mb-3 block text-base font-medium text-[#07074D]"
-                 >
-                 يوم استلام الشحنه :
-                </label>
-                <input
-                 type="date"
-                 name="date"
-                id="date"
-                required
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                value={orderData.date} onChange={(e) => setOrderData({...orderData , date:e.target.value})}  
-                />
-             </div>
-            <div className="mb-5">
-                <label
-                 htmlFor="time"
-                className="mb-3 block text-base font-medium text-[#07074D]"
-                >
-              وقت استلام الشحنه :
-            </label>
-            <input
-              type="time"
-              name="time"
-              id="time"
-              required
-              className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              value={orderData.time} onChange={(e) => setOrderData({...orderData , time:e.target.value})}  
-              />
+ 
 
-          </div>
             
           </div>
         <h1 className='text-xl font-medium text-gray-900'>الرجاء تحديد موقعك:</h1>

@@ -1,9 +1,24 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import Swal from 'sweetalert2';
-import 'flowbite'
+import React, {  useState } from 'react'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-  
+
+import {
+
+
+  PopoverContent,
+  Popover,
+  PopoverHandler,
+
+} from "@material-tailwind/react";
+import Swal from 'sweetalert2';
+
+import "@material-tailwind/react";
+
+type Location = {
+    lat: number;
+    lng: number;
+  };
 
 type Order = {
     name: string,
@@ -23,10 +38,24 @@ type Order = {
     idUser:string,
     location:string,
     status:string,
+    loc:Location,
+
    
   }
 function AdminOrdersC() {
     const [getInfo, setgetInfo] = useState<Order[]>([]);
+    const [time, setTime] = useState('');
+    const [date, setDate] = useState('');
+
+    const [comment, setComment] = useState('');
+
+    const mapStyles = {
+      height: "30vh",
+      width: "70%"
+    };
+
+ 
+
 
 
 React.useEffect(() => {
@@ -43,196 +72,352 @@ const getData = () => {
           })
     }
           
-      
+    // const [openAccept, setOpenAccept] = React.useState(false);
+    // const [openReject, setOpenReject] = React.useState(false);
 
-    // const acceptOrder = (id: string) => {
+    // const openDrawerAccept = () => setOpenAccept(true);
+    // const closeDrawerAccept = () => setOpenAccept(false);
+    // const openDrawerReject = () => setOpenReject(true);
+    // const closeDrawerReject = () => setOpenReject(false);
 
-    //     Swal.fire({
-    //       title: 'قبول الطلب؟',
-    //       showCancelButton: true,
-    //       confirmButtonColor: '#d33',
-    //       cancelButtonColor: '#3085d6',
-    //       confirmButtonText: 'نعم',
-    //       cancelButtonText: 'لا'
-    //     }).then((result) => {
-    //       if (result.isConfirmed) {
-    //         axios
-    //         .put(`https://64facb17cb9c00518f7a31dc.mockapi.io/orders/${id}`,{
-    //           status: 'تم قبول الطلب',
-    //         })
-    //         .then((res) => {
-    //           console.log(res);
-    //           getData()
-    //         })
-    //         .catch((error) => {
-    //           console.log(error);
-    //         });
-    //       }
-    //     })
-      
-    //   };
-      const rejectOrder = (id: string) => {
-
+    const acceptOrder = (id: string) => {  
+      Swal.fire({
+        title: 'هل انت متأكد من اجراء العمليه؟',
+        showCancelButton: true,
+        confirmButtonColor: '#9BE8D8',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'نعم',
+        cancelButtonText: 'لا'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            icon: 'success',
+            title:'لقد تمت العمليه بنجاح',
+            showConfirmButton: false,
+            timer:1500
+          })
+          axios
+          .put(`https://64facb17cb9c00518f7a31dc.mockapi.io/orders/${id}`, {
+            status: 'تم قبول الطلب',
+            date: date,
+            time: time,
+          })
+          .then((res) => {
+            console.log(res);
+            getData();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        }
+      })
+  
+    };
+      const rejectOrder = (id: string) => {  
         Swal.fire({
-          title: 'حذف الطلب؟',
+          title: 'هل انت متأكد من اجراء العمليه؟',
           showCancelButton: true,
-          confirmButtonColor: '#d33',
+          confirmButtonColor: '#9BE8D8',
           cancelButtonColor: '#3085d6',
-          confirmButtonText: 'حذف',
+          confirmButtonText: 'نعم',
           cancelButtonText: 'لا'
         }).then((result) => {
           if (result.isConfirmed) {
+            Swal.fire({
+              icon: 'success',
+              title:'لقد تمت العمليه بنجاح',
+              showConfirmButton: false,
+              timer:1500
+            })
             axios
-            .delete(`https://64facb17cb9c00518f7a31dc.mockapi.io/orders/${id}`)
+            .put(`https://64facb17cb9c00518f7a31dc.mockapi.io/orders/${id}`,{
+              status: 'تم رفض الطلب',
+              comment: comment,
+            })
             .then((res) => {
               console.log(res);
-              setgetInfo(getInfo.filter((del) => del.id !== id));
+              getData()
             })
             .catch((error) => {
               console.log(error);
             });
           }
         })
-      
+    
       };
 
       
   return (
     <div>
+            <div className="w-full flex flex-col items-center mt-16 sm:ml-0">
+                <div className=" bg-white rounded-lg w-9/12   shadow md:flex-row md:mr-44 dark:border-gray-700 dark:bg-white" dir="rtl">
+                      <div className=" bg-[#3d96d1] rounded-lg shadow-lg dark:border  p-10 flex justify-center ">
+                        <h1 className='text-3xl font-bold text-white'>الطلبات الحاليه</h1>
+                      </div>
+                      </div>
+                </div>
 
 {getInfo.slice().reverse().map((order) => {
- return (
+if (order.status !== "تم قبول الطلب" ){
+  if(order.status !== "تم رفض الطلب"){
+  return (
     <div key={order.id}>
-    <div className="w-full flex flex-col items-center justify-center mt-16  sm:ml-0 ">
-        <div className="flex flex-col items-center bg-white  rounded-lg  w-9/12 shadow md:flex-row md:max-w-xl  md:mr-44 dark:border-gray-700 dark:bg-white " dir='rtl'>
-        <div className='w-full bg-white rounded-lg shadow dark:border dark:bg-white p-10  '>
-                <div className='grid sm:grid-cols-2 gap-40'>
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">طلب رقم {order.id}</h5>
-                <div className={`w-36 p-2 text-lg font-medium text-center text-white bg-gray-400  rounded-full focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 ${
-                   order.status === "تم قبول الطلب" ? 'bg-green-500 ' : 'bg-[#c2c9d4]'
-                 }`}>
+      <div className="w-full flex flex-col items-center mt-16 sm:ml-0">
+        <div className=" bg-white rounded-lg w-9/12  shadow md:flex-row md:mr-44 dark:border-gray-700 dark:bg-white" dir="rtl">
+          <div className=" bg-white rounded-lg shadow dark:border dark:bg-white p-10">
+            <div className="flex flex-row justify-between ">
+              <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-black">طلب رقم {order.id}</h5>
+              <div
+                className={`w-36 p-2 text-lg font-medium text-center text-white rounded-full focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 ${order.status === 'تم قبول الطلب'
+                  ? 'bg-green-500'
+                  : order.status === 'تم رفض الطلب'
+                    ? 'bg-[#e96262]'
+                    : 'bg-[#c2c9d4]'}`}
+              >
                 {order.status}
-                 </div>
-                 </div>
-                <div className="grid sm:grid-cols-3">
-                <div>
-                  <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">{order.name}   {order.idUser}</label>
-                </div> 
-                <div>
-                  <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">نوع الماده ١ : {order.category1}</label>
-                </div> 
-                <div>
-                  <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">اسم الماده :  {order.item1Name}</label>
-                </div> 
-                 <div>
-                  <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">الكميه : {order.item1Count}</label>
-                </div>
-
-                <div>
-                  <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">نوع الماده ٢ : {order.category2}</label>
-                </div> 
-                <div>
-                  <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">اسم الماده : {order.item2Name}</label>
-                </div> 
-                 <div>
-                 <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">الكميه : {order.item2Count}</label>
-                </div>
-
-                <div>
-                <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">نوع الماده ٣ : {order.category3}</label>
-                </div> 
-                <div>
-                <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">اسم الماده : {order.item3Name}</label>
-                </div> 
-                 <div>
-                 <label className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">الكميه : {order.item3Count}</label>
-                </div>
-                <div>
-                <label className="block mt-2 text-lg font-medium text-[#07074D]">
-                يوم استلام الشحنه :  
+              </div>
+            </div>
+            <div className="flex flex-row gap-10 ">
+                <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">الاسم: {order.name}</label>
+                  <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black"> الرقم: {order.pho}</label>
+            </div>
+            {order.category1 ? (
+            <div className="flex flex-row gap-10 ">
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">نوع الماده ١ : {order.category1}</label>
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">اسم الماده :  {order.item1Name}</label>
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">الكميه : {order.item1Count}</label>
+              
+            </div>
+            ) : null}
+            {order.category2 ? (
+            <div className="flex flex-row gap-10 ">
+                <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">
+                 نوع المادة ٢ : {order.category2}
                 </label>
-                {order.date}
-                </div>
-                <div>
-                <label className=" block mt-2 text-lg font-medium text-[#07074D]">
-                وقت استلام الشحنه :  
-                </label>
-                {order.time}
-                </div>
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">اسم الماده : {order.item2Name}</label>
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">الكميه : {order.item2Count}</label>
+            </div>
+            ) : null}
+
+          {order.category3 ? (
+            <div className="flex flex-row gap-10 ">
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">نوع الماده ٣ : {order.category3}</label>
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">اسم الماده : {order.item3Name}</label>
+              <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">الكميه : {order.item3Count}</label>
+            </div>
+          ) : null}
+            <div className="flex flex-row gap-10 mt-10">
+              <label className="block text-xl font-medium text-[#07074D]">
+                يوم استلام الشحنه :
+              </label>
+              {order.date}
+              <label className=" block  text-xl font-medium text-[#07074D]">
+                وقت استلام الشحنه :
+              </label>
+              {order.time}
+
+            </div>
+            <div className='flex items-center justify-center mt-10'>
+            <LoadScript
+                googleMapsApiKey='AIzaSyCS4sSfKKZs2OZEgzZDZoaH6sMcPvT-arE'>
+                <GoogleMap
+                  mapContainerStyle={mapStyles}
+                  zoom={order.loc ? 15 : 12}
+                  center={order.loc } 
+                >
+              {order.loc && <Marker position={{ lat: order.loc.lat, lng: order.loc.lng }} />}
+             </GoogleMap>
+              </LoadScript>
             </div>
             <div className='flex flex-row gap-10'>
-                <button type="button" className={`flex flex-1 justify-center items-center w-3/12 px-5 py-2.5 mt-4 sm:mt-6 text-lg font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900  ${
-                  order.status === 'تم قبول الطلب' ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#e96262] hover:bg-[#edacac]'
-                  }`}
-                onClick={()=>{rejectOrder(order.id)}}
-                disabled={order.status === 'تم قبول الطلب'}
-                >
-                رفض الطلب
-                </button>
-                <button
-                  type="button"
-                  className={`flex flex-1 justify-center items-center w-3/12 px-5 py-2.5 mt-4 sm:mt-6 text-lg font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 ${
-                  order.status === 'تم قبول الطلب' ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#3D96D1] hover:bg-[#75c1f4]'
-                  }`}
-                  // onClick={() => acceptOrder(order.id)}
-                 disabled={order.status === 'تم قبول الطلب'}
-                  >
-                 قبول الطلب
-                </button>
-  <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-  Toggle modal
-</button>
+            <Popover placement="bottom">
+              <PopoverHandler>
+                   <button
+                      type="button"
+                      className={`flex flex-1 justify-center items-center w-3/12 px-5 py-2.5 mt-4 sm:mt-6 text-lg font-medium text-center text-white rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 ${order.status === 'تم قبول الطلب' || order.status === 'تم رفض الطلب' ? 'hidden' : 'bg-[#3D96D1] hover:bg-[#75c1f4]'}`}
+                      >
+                      قبول الطلب
+                    </button>
+            </PopoverHandler>
+              <PopoverContent className="w-96">
+              <div className="p-6 text-center">
+                      <h1 className="text-xl font-bold mb-5">الرجاء تحديد كلا من الاتي:</h1>
+                      <div className="mb-5">
+                        <label htmlFor="date" className="mb-3 block text-lg font-medium text-[#07074D]">
+                          : يوم استلام الشحنة
+                        </label>
+                        <input
+                          type="date"
+                          name="date"
+                          id="date"
+                          required
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          value={date}
+                          onChange={(e) => setDate(e.target.value)} />
+                      </div>
+                      <div className="mb-5">
+                        <label htmlFor="time" className="mb-3 block text-lg font-medium text-[#07074D]">
+                          : وقت استلام الشحنة
+                        </label>
+                        <input
+                          type="time"
+                          name="time"
+                          id="time"
+                          required
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          value={time}
 
-<div id="authentication-modal" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div className="relative w-full max-w-md max-h-full">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button" className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                          onChange={(e) => setTime(e.target.value)} />
+                      </div>
+                      <button
+                        type="button"
+                        className="text-white bg-[#3D96D1] hover:bg-[#75c1f4] focus:ring-4 focus:outline-none font-medium rounded-lg text-lg inline-flex items-center px-5 py-2.5 text-center mr-2"
+                        onClick={() => { acceptOrder(order.id); } }
+
+                      >
+                        تأكيد
+                      </button>
+                    </div>
+              </PopoverContent>
+              </Popover>
+              <Popover placement="bottom">
+              <PopoverHandler>
+              <button type="button"
+                      className={`flex flex-1 justify-center items-center w-3/12 px-5 py-2.5 mt-4 sm:mt-6 text-lg font-medium text-center text-white  rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900  ${order.status === 'تم قبول الطلب' || order.status === 'تم رفض الطلب' ? 'hidden' : 'bg-[#e96262] hover:bg-[#edacac]'}`}
+                      >
+                      رفض الطلب
+                </button>
+            </PopoverHandler>
+              <PopoverContent className="w-96">
+              <div className="p-6 text-center">
+                      <h1 className='text-xl font-bold mb-5'>الرجاء ذكر سبب الرفض :: </h1>
+                      <div>
+                        <textarea id="message" name="message" rows={4} className="mt-1 mb-2 p-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder='الكتابه هنا.....'
+                          value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="text-white bg-[#3D96D1] hover:bg-[#75c1f4] focus:ring-4 focus:outline-none font-medium rounded-lg text-lg inline-flex items-center px-5 py-2.5 text-center mr-2"
+                        onClick={() => rejectOrder(order.id)}
+                      >
+                        تأكيد
+                      </button>
+                    </div>
+              </PopoverContent>
+              </Popover>
+
+                 
+            </div>
+ 
+
+          </div>
+
+        </div>
+
+      </div>
+     
+      {/* <Drawer open={openAccept} onClose={closeDrawerAccept} dir='rtl' className='w-52 lg:w-full'>
+                <div className="mb-2 flex items-center justify-between p-4">
+                <Typography variant="h3" color="blue-gray">
+               تعبئه النموذج
+                </Typography>
+                <IconButton variant="text" color="blue-gray" onClick={closeDrawerAccept} >
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-5 w-5 -mt-3 "
+                 >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                <span className="sr-only">Close modal</span>
-            </button>
-            <div className="px-6 py-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
-                <form className="space-y-6" action="#">
-                    <div>
-                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required/>
+                </IconButton>
                     </div>
-                    <div>
-                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required/>
+                    <div className="p-6 text-center">
+                      <h1 className="text-xl font-bold mb-5">الرجاء تحديد كلا من الاتي:</h1>
+                      <div className="mb-5">
+                        <label htmlFor="date" className="mb-3 block text-lg font-medium text-[#07074D]">
+                          : يوم استلام الشحنة
+                        </label>
+                        <input
+                          type="date"
+                          name="date"
+                          id="date"
+                          required
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          value={date}
+                          onChange={(e) => setDate(e.target.value)} />
+                      </div>
+                      <div className="mb-5">
+                        <label htmlFor="time" className="mb-3 block text-lg font-medium text-[#07074D]">
+                          : وقت استلام الشحنة
+                        </label>
+                        <input
+                          type="time"
+                          name="time"
+                          id="time"
+                          required
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          value={time}
+
+                          onChange={(e) => setTime(e.target.value)} />
+                      </div>
+                      <button
+                        type="button"
+                        className="text-white bg-[#3D96D1] hover:bg-[#75c1f4] focus:ring-4 focus:outline-none font-medium rounded-lg text-lg inline-flex items-center px-5 py-2.5 text-center mr-2"
+                        onClick={() => { acceptOrder(order.id); } }
+
+                      >
+                        تأكيد
+                      </button>
                     </div>
-                    <div className="flex justify-between">
-                        <div className="flex items-start">
-                            <div className="flex items-center h-5">
-                                <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required/>
-                            </div>
-                            <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                        </div>
-                        <a href="#" className="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                 </Drawer>
+
+                 <Drawer open={openReject} onClose={closeDrawerReject} dir='rtl' className='w-52 lg:w-full'>
+                <div className="mb-2 flex items-center justify-between p-4">
+                <Typography variant="h3" color="blue-gray">
+                تعبئه النموذج
+                </Typography>
+                <IconButton variant="text" color="blue-gray" onClick={closeDrawerReject} >
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-5 w-5 -mt-3 "
+                 >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                </IconButton>
                     </div>
-                    <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
-                    <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                        Not registered? <a href="#" className="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
+                    <div className="p-6 text-center">
+                      <h1 className='text-xl font-bold mb-5'>الرجاء ذكر سبب الرفض :: </h1>
+                      <div>
+                        <textarea id="message" name="message" rows={4} className="mt-1 mb-2 p-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder='الكتابه هنا.....'
+                          value={comment} onChange={(e) => setComment(e.target.value)}></textarea>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="text-white bg-[#3D96D1] hover:bg-[#75c1f4] focus:ring-4 focus:outline-none font-medium rounded-lg text-lg inline-flex items-center px-5 py-2.5 text-center mr-2"
+                        onClick={() => rejectOrder(order.id)}
+                      >
+                        تأكيد
+                      </button>
                     </div>
-                </form>
-            </div>
-        </div>
+                 </Drawer> */}
+
     </div>
-</div> 
-            </div>
-            </div>
-        </div>
-        
-        </div>
 
 
-        </div>
-    
-        )
-    })}
-
+  );
+}
+}
+  
+})}
 
 
 
