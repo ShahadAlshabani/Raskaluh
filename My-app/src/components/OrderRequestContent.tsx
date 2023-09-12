@@ -32,6 +32,8 @@ type Order = {
   location:string,
   loc:object,
   status:string,
+
+  points:number,
  
 }
 function OrderRequestContent() {
@@ -122,7 +124,7 @@ function OrderRequestContent() {
 
         date:"سيتم تحديده لاحقا",
         time:"سيتم تحديده لاحقا",
-
+        points:0,
         location:"",
         status:"تحت المعالجه",
         loc: { lat: 0, lng: 0 }
@@ -162,6 +164,7 @@ function OrderRequestContent() {
               location:orderData.location,
               status:orderData.status,
               loc:userLocation,
+              points:orderData.points
               
             })
               .then(response => {

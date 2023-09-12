@@ -5,8 +5,33 @@ import {PiSignOutBold} from 'react-icons/pi'
 import { NavLink, useParams } from 'react-router-dom'
 import logo  from '../assets/logo.png'
 import 'flowbite'
+import {  useState } from 'react'
+import React from 'react'
+import axios from 'axios'
 
+type Order = {
+  name: string,
+  category1: string,
+  category2: string,
+  category3: string,
+  pho: string,
+  item1Name: string,
+  item2Name: string,
+  item3Name: string,
 
+  item1Count: number,
+  item2Count: number,
+  item3Count: number,
+
+  date:string,
+  time:string,
+  id:string,
+  idUser:string,
+  location:string,
+  status:string,
+ comment:string,
+ points:number,
+}
 export const SideNav = () => {
     const {id} = useParams()
 
@@ -18,6 +43,38 @@ export const SideNav = () => {
        
       
       };
+
+      const [coin, setCoin] = useState(0);
+
+      React.useEffect(() => {
+        getData();
+      }, []);
+      
+      const getData = () => {
+        axios
+          .get('https://64facb17cb9c00518f7a31dc.mockapi.io/orders')
+          .then((response) => {
+            const orders: Order[] = response.data;
+            const matchedOrders = orders.filter((order: Order) => order.idUser === `${id}`);
+            console.log(matchedOrders);
+            const totalCoins = matchedOrders.reduce((acc, order) => {
+              const coinValue = order.points
+              console.log(acc);
+
+              if (!isNaN(coinValue)) {
+                return acc + coinValue;
+              }
+              return acc;
+            }, 0);
+            setCoin(totalCoins);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+
+
+
   return (
 <div>
 
@@ -86,8 +143,8 @@ export const SideNav = () => {
           <div
             className="flex items-center mt-80 p-2 text-gray-900 rounded-lg dark:text-white group"
           >
-            <FaCoins className="w-6 h-6" />
-            <span className="mr-3 text-lg">١٠٠</span>
+            <FaCoins className="w-6 h-6 text-yellow-300" />
+            <span className="mr-3 text-lg ">{coin}</span>
             <span className="mr-3 text-lg">نقطه</span>
           </div>
         </li>

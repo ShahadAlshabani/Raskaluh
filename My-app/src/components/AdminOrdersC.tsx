@@ -39,9 +39,12 @@ type Order = {
     location:string,
     status:string,
     loc:Location,
+    points:number,
 
    
   }
+
+
 function AdminOrdersC() {
     const [getInfo, setgetInfo] = useState<Order[]>([]);
     const [time, setTime] = useState('');
@@ -80,7 +83,7 @@ const getData = () => {
     // const openDrawerReject = () => setOpenReject(true);
     // const closeDrawerReject = () => setOpenReject(false);
 
-    const acceptOrder = (id: string) => {  
+    const acceptOrder = (id: string ) => {  
       Swal.fire({
         title: 'هل انت متأكد من اجراء العمليه؟',
         showCancelButton: true,
@@ -103,6 +106,16 @@ const getData = () => {
             time: time,
           })
           .then((res) => {
+            console.log(res);
+            getData();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          axios
+          .put(`https://64facb17cb9c00518f7a31dc.mockapi.io/orders/${id}`, {
+            points:100
+          })  .then((res) => {
             console.log(res);
             getData();
           })
@@ -157,7 +170,7 @@ const getData = () => {
                       </div>
                 </div>
 
-{getInfo.slice().reverse().map((order) => {
+{getInfo.map((order) => {
 if (order.status !== "تم قبول الطلب" ){
   if(order.status !== "تم رفض الطلب"){
   return (
