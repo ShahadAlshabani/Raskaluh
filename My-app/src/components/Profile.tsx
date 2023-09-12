@@ -136,7 +136,7 @@ function Profile() {
 
                 <div className="w-full flex flex-col items-center justify-center h-screen">
                     
-                    <div className="flex flex-col items-center justify-center -mt-96 md:mr-72 md:ml-20">
+                    <div className="flex flex-col items-center justify-center -mt-96 relative -top-20  md:mr-72 md:ml-20  lg:-top-16 xl:-top-7">
                     <Popover placement="bottom" >
                     <PopoverHandler>
                     <div className="relative" >

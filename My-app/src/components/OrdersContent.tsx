@@ -90,11 +90,9 @@ const getData = () => {
   return (
     <div key={order.id}>
 
-<div className="w-full flex flex-col items-center relative mt-16 sm:ml-0">
-
-  <div className="bg-white  rounded-lg w-9/12 shadow md:flex-row md:mr-44 dark:border-gray-700 dark:bg-white" dir="rtl">
-   
-          <div className=" bg-white rounded-lg shadow dark:border dark:bg-white p-10 ">
+<div className="w-full flex flex-col items-center relative mt-16  sm:ml-0">
+        <div className=" bg-white rounded-lg w-10/12  shadow md:flex-row  md:mr-44 md:w-8/12  dark:border-gray-700 dark:bg-white" dir="rtl">
+          <div className=" bg-white rounded-lg shadow dark:border dark:bg-white p-10  ">
           <span className="absolute -top-10  -mr-20 z-[-1]">
         <svg
           width={100}
@@ -193,6 +191,18 @@ const getData = () => {
 
 
 })}
+
+{getInfo.length<1  && (
+    <div>
+         <div className="w-full flex flex-col items-center mt-16 sm:ml-0">
+                <div className=" bg-white rounded-lg w-9/12   shadow md:flex-row md:mr-44 dark:border-gray-700 dark:bg-white" dir="rtl">
+                      <div className=" bg-white rounded-lg shadow-lg dark:border  p-36 flex justify-center ">
+                        <h1 className='text-3xl font-bold text-[#3d96d1]'>لايوجد شيء حاليا... </h1>
+                      </div>
+                      </div>
+                </div>
+    </div>
+  )}
 
 
     </div>
