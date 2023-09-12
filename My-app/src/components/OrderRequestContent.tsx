@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 
 
-
 type Location = {
     lat: number;
     lng: number;
@@ -49,7 +48,6 @@ function OrderRequestContent() {
       };
       const [userLocation, setUserLocation] = useState<Location>();
       const [placeName, setPlaceName] = useState<string>('');
-      // const [placeLoc, setPlaceLoc] = useState<Location>();
 
       const fetchPlaceName = async (latitude: number, longitude: number) => {
         try {
@@ -77,7 +75,6 @@ function OrderRequestContent() {
               };
               setUserLocation(userLocation);
               fetchPlaceName(latitude, longitude);
-              console.log(userLocation)
             },
             (error) => {
               console.error("Error getting user location:", error);
@@ -167,30 +164,33 @@ function OrderRequestContent() {
               points:orderData.points
               
             })
-              .then(response => {
-                console.log(response.data);
-                window.location.href=`/user/orders/${id}`
+            .then(() => {
+              window.location.href=`/user/orders/${id}`
+            })
+            .catch(() => {
+            });
           
-              })
-              .catch(error => {
-                console.error(error);
-              });
 
           }
          })
    }
   
-    
+
+
+
 
   return (
     <div>
                     
 <div className='flex justify-center items-center  w-full ' dir='rtl'> 
-<section className="flex flex-col  justify-center items-center mt-10  w-full bg-white  ">
-  <div className="py-8 px-4  max-w-2xl lg:py-16 md:mr-44">
-      <h2 className="mb-4 text-2xl font-bold text-[#3D96D1] ">تقديم طلب استلام المواد المعاد تدويرها</h2>
-      <form className='w-full bg-white rounded-lg shadow dark:border dark:bg-white p-10' onSubmit={submitOrder}>
+<section className="flex flex-col   justify-center items-center mt-10  w-full bg-white  ">
 
+  <div className="py-8 px-4  max-w-2xl  lg:py-16 md:mr-44">
+
+      <h2 className="mb-4 text-2xl  font-bold text-[#3D96D1] ">تقديم طلب استلام المواد المعاد تدويرها</h2>
+  
+      <form className='w-full bg-white  rounded-lg shadow dark:border dark:bg-white p-10' onSubmit={submitOrder}>
+    
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
               <div className="sm:col-span-3">
                   <label htmlFor="name" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">الاسم :</label>
@@ -209,8 +209,8 @@ function OrderRequestContent() {
                             placeholder="+966 (XXXXXXXXX) "
                             dir="ltr"
                             pattern="[0-9]{10}"
-                            value={orderData.pho} onChange={(e) => setOrderData({...orderData , pho:e.target.value})} 
-
+                            value = {orderData.pho}
+                            onChange={(e) => setOrderData({...orderData , pho:e.target.value})} 
                             required
                         />
                 </div>
@@ -228,8 +228,22 @@ function OrderRequestContent() {
               
               <div>
                   <label htmlFor="item1Name" className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">اسم الماده :</label>
-                  <input type="text" name="item1Name" id="item1Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="قاروره ماء "required
-                    value={orderData.item1Name} onChange={(e) => setOrderData({...orderData , item1Name:e.target.value})}  />
+                  <select id="item1Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"required
+                    value={orderData.item1Name} onChange={(e) => setOrderData({...orderData , item1Name:e.target.value})}  >
+                     <option value="" >اختر</option>
+                      <option value="قاروره ماء" >قاروره ماء</option>
+                      <option value="كتب"> كتب</option>
+                      <option value="كاس">كاس</option>
+                      <option value="صحون">صحون</option>
+                      <option value="اكواب">اكواب</option>
+                      <option value="مناديل">مناديل</option>
+                      <option value="ملاعق">ملاعق</option>
+                      <option value="علب">علب</option>
+                      <option value="كرتون">كرتون</option>
+                      <option value="اكياس">اكياس</option>
+
+                  </select>
+
                     </div> 
               <div>
                   <label htmlFor="item1Count" className="block mb-2 mt-6 text-lg font-medium text-gray-900 dark:text-black">الكميه :</label>
@@ -250,8 +264,21 @@ function OrderRequestContent() {
               
               <div>
                   <label htmlFor="item2Name" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">اسم الماده :</label>
-                  <input type="text" name="item2Name" id="item2Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="كاس"
-                    value={orderData.item2Name} onChange={(e) => setOrderData({...orderData , item2Name:e.target.value})}  />
+                  <select id="item2Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value={orderData.item2Name} onChange={(e) => setOrderData({...orderData , item2Name:e.target.value})}  >
+                     <option value="" >اختر</option>
+                      <option value="قاروره ماء" >قاروره ماء</option>
+                      <option value="كتب"> كتب</option>
+                      <option value="كاس">كاس</option>
+                      <option value="صحون">صحون</option>
+                      <option value="اكواب">اكواب</option>
+                      <option value="مناديل">مناديل</option>
+                      <option value="ملاعق">ملاعق</option>
+                      <option value="علب">علب</option>
+                      <option value="كرتون">كرتون</option>
+                      <option value="اكياس">اكياس</option>
+
+                  </select>
                     </div> 
               <div>
                   <label htmlFor="item2Count" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">الكميه :</label>
@@ -270,8 +297,21 @@ function OrderRequestContent() {
               </div>
               <div>
                   <label htmlFor="item3Name" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">اسم الماده :</label>
-                  <input type="text" name="item3Name" id="item3Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="كتاب"
-                    value={orderData.item3Name} onChange={(e) => setOrderData({...orderData , item3Name:e.target.value})}  />
+                  <select id="item3Name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5  dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    value={orderData.item3Name} onChange={(e) => setOrderData({...orderData , item3Name:e.target.value})}  >
+                     <option value="" >اختر</option>
+                      <option value="قاروره ماء" >قاروره ماء</option>
+                      <option value="كتب"> كتب</option>
+                      <option value="كاس">كاس</option>
+                      <option value="صحون">صحون</option>
+                      <option value="اكواب">اكواب</option>
+                      <option value="مناديل">مناديل</option>
+                      <option value="ملاعق">ملاعق</option>
+                      <option value="علب">علب</option>
+                      <option value="كرتون">كرتون</option>
+                      <option value="اكياس">اكياس</option>
+
+                  </select>
                     </div> 
               <div>
                   <label htmlFor="item3Count" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">الكميه :</label>

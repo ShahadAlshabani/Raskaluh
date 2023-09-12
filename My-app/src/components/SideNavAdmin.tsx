@@ -4,6 +4,7 @@ import {PiSignOutBold} from 'react-icons/pi'
 import { NavLink, useParams } from 'react-router-dom'
 import logo  from '../assets/logo.png'
 import 'flowbite'
+import { useState } from 'react'
 
 
 export const SideNavAdmin = () => {
@@ -12,17 +13,22 @@ export const SideNavAdmin = () => {
     const signOut = () =>{
 
       
-            localStorage.setItem('isLogged','false');
+            localStorage.setItem('isLoggedAdmin','false');
             window.location.href='/login';
        
       
       };
+
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+
+    };
   return (
 <div>
 
-    <aside
-    id="navbar-cta"
-    className="fixed top-0 right-0 z-40 w-full h-screen transition-transform translate-x-0 lg:w-64 md:w-64 md:flex "
+    <aside    
+    className={`fixed top-0 right-0 z-40 w-full h-screen ${isMenuOpen ? 'flex' : 'hidden'} transition-transform translate-x-0 md:flex lg:w-64 md:w-64  `}
     aria-label="Sidebar"
     dir="rtl"
   >
@@ -99,11 +105,10 @@ export const SideNavAdmin = () => {
     </div>
   </aside>
   <button
-        data-collapse-toggle="navbar-cta"
+   aria-expanded={isMenuOpen ? 'true' : 'false'}
+   onClick={toggleMenu}
         type="button"
         className="z-50 fixed top-0 left-0 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#9BE8D8] dark:focus:ring-gray-600"
-        aria-controls="navbar-cta"
-        aria-expanded="false"
       >
         <span className="sr-only">Open main menu</span>
         <svg

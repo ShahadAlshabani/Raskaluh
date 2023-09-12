@@ -4,7 +4,7 @@ import 'flowbite';
 import logo from '../assets/logo.png'
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2'
-
+import img from '../assets/Group_781.svg'
 
 import {  useState } from "react";
 
@@ -18,16 +18,14 @@ const Home = () => {
         e.preventDefault();
       
         emailjs.sendForm('service_rsq949j', 'template_0lj1hq6', e.target as HTMLFormElement, '2HxJgm5GRcBV66ZDS')
-          .then((result) => {
-            console.log(result.text);
+          .then(() => {
             Swal.fire({
                 icon: 'success',
                 title: '!تم ارسال الرساله بنجاح',
                 showConfirmButton: false,
                 timer: 1500
               })
-          }, (error) => {
-            console.log(error.text);
+          }, () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -74,15 +72,18 @@ const Home = () => {
              </div>
          </div>
     </nav>
-    <div className="w-screen  mt-10 md:max-h-96 md:mb-40 md:mt-0">
-    <img src="../src/assets/Group_781.svg" className="">
+    <div className="w-screen  mt-10  md:mt-0">
+      
+    <img src={img} className="w-screen">
+      
     </img>
+   
     </div>
-    <div className=" mb-36">
-
-     <CardsHome></CardsHome>
-     <section className="flex items-center  p-20 dark:bg-slate-200 " dir="rtl" id="about-us">
-        <div className="justify-center flex-1 max-w-6xl py-4 mx-auto lg:py-6 md:px-6" >
+   
+    <div className=" mb-36 ">
+    <CardsHome></CardsHome>
+     <section className="flex items-center  p-20 dark:bg-slate-200  " dir="rtl" id="about-us">
+        <div className="justify-center flex-1 max-w-6xl py-4 mx-auto lg:py-6 md:px-6 " >
             <div className="flex flex-wrap ">
                 <div className="w-full px-4 mb-10 lg:w-1/2 lg:mb-0">
                     <div className="relative lg:max-w-md">
@@ -119,10 +120,10 @@ const Home = () => {
     </section>
  
     <div className="flex items-center justify-center">
-    <section className="bg-white py-20  relative z-10 md:w-full " dir="rtl" id="contact-us">
-        <div className="container  md:mr-16">
-          <div className=" mx-auto max-w-screen-md" >
-              <div className="relative p-8  bg-slate-200 rounded-lg shadow-lg sm:p-12 ">
+    <section className="bg-white py-20  relative z-10 w-10/12 " dir="rtl" id="contact-us">
+        <div className="container  ">
+          <div className=" mx-auto max-w-screen-md " >
+              <div className="relative p-8  bg-slate-200 rounded-lg shadow-lg ">
               <h2 className="mb-4 mt-2 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-black" >تواصل معنا</h2>
         <p className="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl" >نسعد بتلقي استفساراتكم</p>
               <form className="space-y-8 rounded p-5" onSubmit={sendEmail}>

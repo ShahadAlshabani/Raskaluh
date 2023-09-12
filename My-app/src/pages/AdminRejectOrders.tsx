@@ -1,4 +1,3 @@
-import React from 'react'
 import { SideNavAdmin } from '../components/SideNavAdmin'
 import AdminRejectOrdersC from '../components/AdminRejectOrdersC'
 

@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import {FaUserCircle} from 'react-icons/fa'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
+import logo from '../assets/logo.png'
 
 type UserInfo = {
   userName: string;
@@ -47,12 +48,14 @@ export const LogIn = () => {
             timer: 1500,
           }).then((result) => {
             if (!result.isConfirmed) {
-              localStorage.setItem('isLogged', 'true');
               localStorage.setItem('id', matchedAccount.id);
               if(matchedAccount.role === 'Admin'){
                 window.location.href = `/admin/${matchedAccount.id}`;
+                localStorage.setItem('isLoggedAdmin', 'true');
               }else {
                   window.location.href = `/user/${matchedAccount.id}`;
+                  localStorage.setItem('isLogged', 'true');
+
                 }
             }
           });
@@ -64,12 +67,12 @@ export const LogIn = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-white to-[#3d96d1] text-right h-screen">
-        <div className="flex flex-row items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <div className="bg-gradient-to-r from-white to-[#3d96d1] text-right h-screen flex justify-center">
+        <div className="flex flex-row items-center justify-center w-11/12 px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 max-w-md xl:p-0 dark:bg-white">
             <div className="p-6 space-y-4 md:space-y-6">
               <a href="/">
-                <img className="h-20" src="../src/assets/logo.png" alt="logo" />
+                <img className="h-20" src={logo} alt="logo" />
               </a>
               <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900 dark:text-[#3d96d1]">
                 تسجيل دخول

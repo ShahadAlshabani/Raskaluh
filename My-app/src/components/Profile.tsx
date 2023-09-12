@@ -17,6 +17,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
+import ban from '../assets/ban.png'
 
 
 type userInfo = {
@@ -59,7 +60,7 @@ function Profile() {
     const imgClick = () => {
         axios.put(`https://64facb17cb9c00518f7a31dc.mockapi.io/users/${id}`, {
         img: imageUrl,
-      }) .then((response) => {console.log(response)
+      }) .then(() => {
         getData();
 
        
@@ -102,7 +103,7 @@ function Profile() {
                         userName: form.userName,
                         email: form.email,
                         password: form.password,
-                      }).then((response) => {console.log(response)
+                      }).then(() => {
                         getData();
                 
                        
@@ -131,7 +132,7 @@ function Profile() {
             
             <div key={user.userName}>
                 
-                <img src="../src/assets/ban.png" className="w-full h-52 -mb-10"/>
+                <img src={ban} className="w-full h-52 -mb-10"/>
 
                 <div className="w-full flex flex-col items-center justify-center h-screen">
                     
@@ -203,7 +204,7 @@ function Profile() {
             </div>
             
             <Drawer open={open} onClose={closeDrawer} dir='rtl' className='w-52 lg:w-full '>
-                <div className="mb-2 flex items-center justify-between p-4">
+                <div className="mb-2 flex items-center justify-between p-4 mt-5 ">
                 <Typography variant="h3" color="blue-gray">
                 تعديل البيانات
                 </Typography>

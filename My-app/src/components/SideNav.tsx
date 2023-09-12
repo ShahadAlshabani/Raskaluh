@@ -45,21 +45,24 @@ export const SideNav = () => {
       };
 
       const [coin, setCoin] = useState(0);
+      const [discountCode, setDiscountCode] = useState("");
+      
+
+
 
       React.useEffect(() => {
         getData();
       }, []);
       
+
       const getData = () => {
         axios
           .get('https://64facb17cb9c00518f7a31dc.mockapi.io/orders')
           .then((response) => {
             const orders: Order[] = response.data;
             const matchedOrders = orders.filter((order: Order) => order.idUser === `${id}`);
-            console.log(matchedOrders);
             const totalCoins = matchedOrders.reduce((acc, order) => {
               const coinValue = order.points
-              console.log(acc);
 
               if (!isNaN(coinValue)) {
                 return acc + coinValue;
@@ -67,20 +70,26 @@ export const SideNav = () => {
               return acc;
             }, 0);
             setCoin(totalCoins);
+            if(totalCoins>=100){
+              setDiscountCode("raskulah2030");
+            }
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(() => {
           });
       };
 
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+      const toggleMenu = () => {
+          setIsMenuOpen(!isMenuOpen);
+    
+        };
 
 
   return (
 <div>
 
-    <aside
-    id="navbar-cta"
-    className="fixed top-0 right-0 z-40 w-full h-screen transition-transform translate-x-0 lg:w-64 md:w-64 md:flex "
+<aside    
+    className={`fixed top-0 right-0 z-40 w-full h-screen ${isMenuOpen ? 'flex' : 'hidden'} transition-transform translate-x-0 md:flex lg:w-64 md:w-64  `}
     aria-label="Sidebar"
     dir="rtl"
   >
@@ -141,22 +150,26 @@ export const SideNav = () => {
         </li>
         <li>
           <div
-            className="flex items-center mt-80 p-2 text-gray-900 rounded-lg dark:text-white group"
+            className="flex flex-col items-center mt-80 p-2 text-gray-900 rounded-lg dark:text-white group"
           >
             <FaCoins className="w-6 h-6 text-yellow-300" />
             <span className="mr-3 text-lg ">{coin}</span>
             <span className="mr-3 text-lg">نقطه</span>
+            <div>
+            {discountCode == "" ? null :
+            <p className='text-green-300 font-bold '>كوبون خصم {discountCode}</p>
+            }
+            </div>
           </div>
         </li>
       </ul>
     </div>
   </aside>
   <button
-        data-collapse-toggle="navbar-cta"
+   aria-expanded={isMenuOpen ? 'true' : 'false'}
+   onClick={toggleMenu}
         type="button"
         className="z-50 fixed top-0 left-0 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#9BE8D8] dark:focus:ring-gray-600"
-        aria-controls="navbar-cta"
-        aria-expanded="false"
       >
         <span className="sr-only">Open main menu</span>
         <svg
