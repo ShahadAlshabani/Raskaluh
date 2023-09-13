@@ -22,7 +22,7 @@
 <br><br><br>
 
 <h3 style="display: block; margin: 0 auto;">تم تطويره بواسطة: شهد محمد الشباني.</h3>
-<h3 align="right">https://github.com/shahadM121</h3>
+<h3 align="right">[https://github.com/shahadM121](https://github.com/ShahadAlshabani)https://github.com/ShahadAlshabani</h3>
 
 
 
