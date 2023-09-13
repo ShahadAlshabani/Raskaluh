@@ -68,7 +68,7 @@ export const LogIn = () => {
   return (
     <div>
       <div className=" text-right h-screen flex justify-center"  style={{
-           backgroundImage: "url('../src/assets/image 1.svg')",
+           backgroundImage: "url('../public/bg.svg')",
           textAlign: 'right',
           height: '100vh',
           display: 'flex',
