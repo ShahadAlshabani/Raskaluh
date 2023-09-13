@@ -12,8 +12,9 @@
 <h2>للدخول للموقع:
 </h2>
 </a>
+<img src="[![Screen Shot 1445-02-28 at 10 46 56 PM](https://github.com/shahadM121/Raskaluh/assets/132405219/b0f7741e-d3d3-4c62-acbc-985ab278a7eb)
+g](https://myqrcode.com/qr/f482b4b0)" alt="Alt text" title="Optional title">
 
-![Screen Shot 1445-02-28 at 10 46 56 PM](https://github.com/shahadM121/Raskaluh/assets/132405219/b0f7741e-d3d3-4c62-acbc-985ab278a7eb)
 
 
 <h3> تم تطويره بواسطه : شهد محمد الشباني.</h3>
