@@ -71,8 +71,16 @@ export const SignUp = () => {
   return (
     <div>
 
-<div className="bg-gradient-to-r from-white to-[#3d96d1] text-right h-screen flex justify-center ">
-        <div className="flex flex-row items-center justify-center w-11/12 px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+        
+      
+<div className=" text-right h-screen flex justify-center"  style={{
+           backgroundImage: "url('../src/assets/image 1.svg')",
+          textAlign: 'right',
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+      }}>
+     <div className="flex flex-row items-center justify-center w-11/12 px-6 py-8 mx-auto md:h-screen lg:py-0 ">
 
                 <div className="w-full bg-white rounded-lg shadow dark:border  md:mt-0 max-w-md xl:p-0 dark:bg-white ">
                     <div className="p-6 space-y-4 md:space-y-6 ">
@@ -118,7 +126,7 @@ export const SignUp = () => {
                       </div>
                   </div>
                   <div className="text-red-300">{error}</div>
-                  <button type="button" className="w-full text-lg text-white bg-[#78C1F3] hover:bg-[#9BE8D8] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  <button type="button" className="w-full text-lg text-white bg-[#78C1F3] hover:opacity-50  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   onClick={signUp}>متابعه</button>
                   <p className="text-lg font-light text-[#3d96d1] ">
                       عندك حساب؟ <a href="/login" className="font-medium hover:underline ">تسجيل دخول</a>

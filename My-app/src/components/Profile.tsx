@@ -17,7 +17,6 @@ import { FaUserCircle } from 'react-icons/fa';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
-import ban from '../assets/ban.png'
 
 
 type userInfo = {
@@ -125,24 +124,31 @@ function Profile() {
         }
     
   return (
-    <div>
-        
+    <div >
+        <div className=" text-right h-screen flex justify-center"  style={{
+           backgroundImage: "url('../public/bgimage.svg')",
+          textAlign: 'right',
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          backgroundRepeat: 'no-repeat'
+      }}>  
         {getInfo.map((user) => {
          return (
             
             <div key={user.userName}>
                 
-                <img src={ban} className="w-full h-52 -mb-10"/>
 
-                <div className="w-full flex flex-col items-center justify-center h-screen">
                     
-                    <div className="flex flex-col items-center justify-center -mt-96 relative -top-20  md:mr-72 md:ml-20  lg:-top-16 xl:-top-7">
+       
+              <div className="flex flex-col  justify-center items-center  bg-white rounded-lg shadow-xl  border-t-4 border-blue-200 w-fit  h-fit mt-36 p-52 md:mr-56 md:ml-10 " dir='rtl'>
+              <div className="-mt-72">
                     <Popover placement="bottom" >
                     <PopoverHandler>
-                    <div className="relative" >
+                    <div className="relative " >
                     <div className="w-40 h-40 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500" >
                         <img
-                         className="hidden group-hover:block w-12"
+                         className="hidden group-hover:block w-12 "
                          src="https://www.svgrepo.com/show/33565/upload.svg"
                          alt=""
                         />
@@ -150,18 +156,19 @@ function Profile() {
                     {user.img ? (
                        <img
                       src={user.img}
-                      className="w-40 h-40 border-4 border-white rounded-full"
+                      className="w-40 h-40 border-t-4 border-blue-200 rounded-full"
                       alt="User Image"
                     />
                     ) : (
                     <img
                       src="https://img.freepik.com/premium-vector/recycle-icon-symbol-vector-illustration_77417-300.jpg"
-                       className="w-40 h-40 border-4 border-white rounded-full"
+                       className="w-40 h-40 border-t-4 border-blue-200 rounded-full"
                        alt="Default Image"
                      />
                     )}
               </div>
-                    </PopoverHandler>
+              
+              </PopoverHandler>
                     <PopoverContent dir='rtl' className=' w-36 lg:w-72'>
                          <Typography variant="h6" color="blue-gray" className="mb-6">
                           ادخل رابط الصوره
@@ -172,13 +179,12 @@ function Profile() {
                          </div>
                        </PopoverContent>
                     </Popover>
-                   
+              </div>
                     <div className="flex items-center space-x-2 mt-2">
                         <p className="text-2xl">{user.userName}</p>
                     </div>
                     <p className="text-gray-700">{user.email}</p>
                     
-                <div className=" flex flex-col items-center bg-white rounded-lg shadow-xl p-8 md:w-screen lg:w-screen  " dir='rtl'>
                     
                 <AiFillEdit className="w-5 h-5 mb-3 cursor-pointer" onClick={openDrawer} />
   
@@ -197,9 +203,7 @@ function Profile() {
                  
                     </ul>
                     
-                    </div>
                     
-            </div>
   
             </div>
             
@@ -263,7 +267,8 @@ function Profile() {
             
             )
          })}
-         
+      </div>
+
     </div>
     
   )

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {  useState } from 'react'
 import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
-
+import {BiSolidError} from 'react-icons/bi'
 
 
 
@@ -115,6 +115,7 @@ const getData = () => {
       </span>
               <div className="flex flex-row justify-between ">
               <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-black">طلب # {count++}</h5>
+
                 
                 <div
                   className={`w-36 p-2 text-lg font-medium text-center text-white rounded-full focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 ${order.status === 'تم رفض الطلب'
@@ -124,10 +125,13 @@ const getData = () => {
                       : 'bg-[#c2c9d4]'}`}
                 >
                   {order.status}
-                  <h2 className='p-2'> السبب: {order.comment}</h2>
 
                 </div>
                 
+              </div>
+              <div className='flex flex-row text-[#e96262] p-2  font-bold text-lg gap-3'>
+              <span className='text-xl'><BiSolidError/></span>
+              <h2> {order.comment}</h2>
               </div>
               <div className="flex flex-row gap-10 ">
                 <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">  الاسم:  {order.name} </label>
