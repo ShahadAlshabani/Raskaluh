@@ -2,7 +2,7 @@ import { SideNavAdmin } from '../components/SideNavAdmin'
 import AdminAcceptOrdersC from '../components/AdminAcceptOrdersC'
 
 function AdminAcceptOrders() {
-    if(localStorage.getItem('isLogged')!== 'true'){
+    if(localStorage.getItem('isLoggedAdmin')!== 'true'){
         window.location.href='/login'
       }
 
