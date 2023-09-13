@@ -8,17 +8,19 @@
 
 ![figma](https://github.com/shahadM121/Raskaluh/assets/132405219/8f5a97ff-979e-40c2-87e4-56d0dc8afcc2)
 
-<a href="https://raskaluh.netlify.app">
 <h2>للدخول للموقع:
 </h2>
+<div>
+<a href="https://raskaluh.netlify.app">
+<img src="My-app/src/assets/QR.png" width="200px" height="200px" alt="Alt text" title="Optional title"  align="right">
 </a>
-<img src="[![Screen Shot 1445-02-28 at 10 46 56 PM](https://github.com/shahadM121/Raskaluh/assets/132405219/b0f7741e-d3d3-4c62-acbc-985ab278a7eb)
-g](https://myqrcode.com/qr/f482b4b0)" alt="Alt text" title="Optional title">
 
+</div>
+<br><br><br>
+<br><br><br>
+<br><br><br>
 
-
-<h3> تم تطويره بواسطه : شهد محمد الشباني.</h3>
-
+<h3 style="display: block; margin: 0 auto;">تم تطويره بواسطة: شهد محمد الشباني.</h3>
 
 
 
