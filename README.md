@@ -6,7 +6,8 @@
 </h2>
 
 
-![figma](https://github.com/shahadM121/Raskaluh/assets/132405219/8f5a97ff-979e-40c2-87e4-56d0dc8afcc2)
+![figma](https://github.com/shahadM121/Raskaluh/assets/132405219/61b73f56-6f76-403a-bbd2-245b3d179374)
+
 
 <h2>للدخول للموقع:
 </h2>
