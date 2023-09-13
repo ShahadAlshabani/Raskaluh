@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { BiSolidError } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -125,9 +126,15 @@ const getData = () => {
                  : 'bg-[#c2c9d4]'}`}
              >
                {order.status}
-               {order.status === 'تم رفض الطلب' && <h2 className="p-2"> السبب: {order.comment}</h2>}
               </div>
+             
             </div>
+            {order.status === 'تم رفض الطلب' ? (
+                <div className="flex flex-row text-[#e96262] p-2 font-bold text-lg gap-3">
+                 <span className="text-xl"><BiSolidError/></span>
+                 <h2>{order.comment}</h2>
+                   </div>
+              ) : null}
             <div className="flex flex-row gap-10 ">
                 <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black">الاسم: {order.name}</label>
                   <label className="block mb-2 mt-6 text-xl font-medium text-gray-900 dark:text-black"> الرقم: {order.pho}</label>
