@@ -7,7 +7,7 @@ const CardsHome = () => {
   <h1 className="text-center text-2xl text-gray-500 font-bold mb-10">اهم الموارد في اعاده التدوير</h1>
   <div className="flex flex-wrap -mx-1 lg:-mx-4 justify-center gap-6  ">
   <div className=" w-36 h-36 rounded-full overflow-hidden shadow-lg flex flex-col justify-center items-center hover:scale-75
- md:w-52 md:h-52 2xl:w-96 ">
+ md:w-52 md:h-52 ">
   <img className="w-52 h-52 rounded-full" src="https://www.conserve-energy-future.com/wp-content/uploads/2021/07/broken-wine-glass.jpg" />
   <div className="px-6 py-4">
     <div className="  font-bold text-lg mb-2 text-center">زجاج</div>
