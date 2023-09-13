@@ -17,7 +17,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { MdOutlineAlternateEmail } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import Swal from 'sweetalert2';
-
+import bgimage from '../assets/bgimage.svg'
 
 type userInfo = {
     userName: string;
@@ -126,8 +126,8 @@ function Profile() {
   return (
     <div >
         <div className=" text-right h-screen flex justify-center"  style={{
-           backgroundImage: "url('../public/bgimage.svg')",
-          textAlign: 'right',
+           backgroundImage: `url(${bgimage})`,
+           textAlign: 'right',
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
@@ -180,10 +180,10 @@ function Profile() {
                        </PopoverContent>
                     </Popover>
               </div>
-                    <div className="flex items-center space-x-2 mt-2">
+                    <div className="flex flex-col items-center space-x-2  mt-6 mb-10">
                         <p className="text-2xl">{user.userName}</p>
+                        <p className="text-gray-700">{user.email}</p>
                     </div>
-                    <p className="text-gray-700">{user.email}</p>
                     
                     
                 <AiFillEdit className="w-5 h-5 mb-3 cursor-pointer" onClick={openDrawer} />

@@ -5,6 +5,7 @@ import {FaUserCircle} from 'react-icons/fa'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import logo from '../assets/logo.png'
+import bg from '../assets/bg.svg';
 
 type UserInfo = {
   userName: string;
@@ -68,11 +69,12 @@ export const LogIn = () => {
   return (
     <div>
       <div className=" text-right h-screen flex justify-center"  style={{
-           backgroundImage: "url('../public/bg.svg')",
+           backgroundImage: `url(${bg})`,
           textAlign: 'right',
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
+          backgroundRepeat: 'no-repeat'
       }}>
         <div className="flex flex-row items-center justify-center w-11/12 px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 max-w-md xl:p-0 dark:bg-white">

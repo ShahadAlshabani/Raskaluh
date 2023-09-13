@@ -6,6 +6,7 @@ import {MdOutlineAlternateEmail} from 'react-icons/md'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import logo from '../assets/logo.png'
+import bg from '../assets/bg.svg';
 
 type userInfo = {
   userName: string;
@@ -74,11 +75,13 @@ export const SignUp = () => {
         
       
 <div className=" text-right h-screen flex justify-center"  style={{
-           backgroundImage: "url('../src/assets/image 1.svg')",
-          textAlign: 'right',
+           backgroundImage: `url(${bg})`,
+           textAlign: 'right',
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
+          backgroundRepeat: 'no-repeat',
+
       }}>
      <div className="flex flex-row items-center justify-center w-11/12 px-6 py-8 mx-auto md:h-screen lg:py-0 ">
 

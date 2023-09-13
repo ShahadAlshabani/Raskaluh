@@ -4,6 +4,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
+import bgimage from '../assets/bgimage.svg'
 
 
 type Location = {
@@ -40,7 +41,7 @@ function OrderRequestContent() {
 
     const mapStyles = {
         height: "50vh",
-        width: "90%"
+        width: "100%"
       };
       const defaultCenter: Location = {
         lat: 24.713552,
@@ -181,16 +182,23 @@ function OrderRequestContent() {
 
   return (
     <div>
-                    
-<div className='flex justify-center items-center  w-full ' dir='rtl'> 
-<section className="flex flex-col   justify-center items-center mt-10  w-full bg-white  ">
+                
+<div className='flex justify-center items-center  w-full ' dir='rtl' 
+          > 
+<section className="flex flex-col   justify-center items-center   w-full bg-white  "
+style={{
+  backgroundImage: `url(${bgimage})`,
+  textAlign: 'right',
+  display: 'flex',
+  justifyContent: 'center',
+ backgroundRepeat: 'no-repeat'}}>
 
   <div className="py-8 px-4  max-w-2xl  lg:py-16 md:mr-44">
 
-      <h2 className="mb-4 text-2xl  font-bold text-[#3D96D1] ">تقديم طلب استلام المواد المعاد تدويرها</h2>
   
       <form className='w-full bg-white  rounded-lg shadow dark:border dark:bg-white p-10' onSubmit={submitOrder}>
-    
+      <h2 className="mb-4 text-2xl  font-bold text-[#3D96D1] ">تقديم طلب استلام المواد المعاد تدويرها</h2>
+
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
               <div className="sm:col-span-3">
                   <label htmlFor="name" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">الاسم :</label>
@@ -283,7 +291,7 @@ function OrderRequestContent() {
               <div>
                   <label htmlFor="item2Count" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">الكميه :</label>
                   <input type="number" name="item2Count" id="item2Count" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="12"
-                    min="0" value={orderData.item2Count} onChange={(e) => setOrderData({...orderData , item2Count:parseInt(e.target.value)})}  />
+                    min="10" value={orderData.item2Count} onChange={(e) => setOrderData({...orderData , item2Count:parseInt(e.target.value)})}  />
                     </div> 
               <div>
                   <label htmlFor="category3" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">اختر ماده اخرى : (اختياري)</label>
@@ -316,13 +324,13 @@ function OrderRequestContent() {
               <div>
                   <label htmlFor="item3Count" className="block mb-2 text-lg font-medium text-gray-900 dark:text-black">الكميه :</label>
                   <input type="number" name="item3Count" id="item3Count" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="12"
-                    min="0" value={orderData.item3Count} onChange={(e) => setOrderData({...orderData , item3Count:parseInt(e.target.value)})}  />
+                    min="10" value={orderData.item3Count} onChange={(e) => setOrderData({...orderData , item3Count:parseInt(e.target.value)})}  />
                     </div> 
  
 
             
           </div>
-        <h1 className='text-xl font-medium text-gray-900'>الرجاء تحديد موقعك:</h1>
+        <h1 className='text-xl font-medium text-gray-900 '>الرجاء تحديد موقعك:</h1>
         <LoadScript
            googleMapsApiKey='AIzaSyCS4sSfKKZs2OZEgzZDZoaH6sMcPvT-arE'>
           <GoogleMap
@@ -345,7 +353,7 @@ function OrderRequestContent() {
   </div>
 </section>
 </div>
-    </div>
+</div>
   )
 }
 

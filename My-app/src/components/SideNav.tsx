@@ -157,7 +157,8 @@ export const SideNav = () => {
             <span className="mr-3 text-lg">نقطه</span>
             <div>
             {discountCode == "" ? null :
-            <p className='text-green-300 font-bold '>كوبون خصم {discountCode}</p>
+            <p className='text-black font-bold '>كوبون خصم {discountCode} <p>غير مفعل حاليا</p> </p>
+            
             }
             </div>
           </div>
